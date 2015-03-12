@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="BeginOcr">Распознать текст</system:String>
+    <system:String x:Key="OpenImages">Открыть изображения</system:String>
+    <system:String x:Key="SaveText">Сохранить как текст</system:String>
+    <system:String x:Key="SaveWord">Сохранить как Word документ</system:String>
+    <system:String x:Key="RecognizeAll">Распознать все изображения</system:String>
+    <system:String x:Key="Language">Выбрать язык</system:String>
+    <system:String x:Key="About">О программе</system:String>
+    <system:String x:Key="Info">Информация</system:String>
+    <system:String x:Key="Exit">Выход</system:String>
+    <system:String x:Key="English">English</system:String>
+    <system:String x:Key="Russian">Русский</system:String>
+    <system:String x:Key="File">Файл</system:String>
+    <system:String x:Key="Save">Сохранить</system:String>
+    <system:String x:Key="OpenPdf">Открыть Pdf</system:String>
+    <system:String x:Key="OpenLanguageFolder">Open Language folder</system:String>
+    <system:String x:Key="InstallLanguage">How to isntall new language</system:String>
+    <system:String x:Key="OpenWebSite">Open web site</system:String>
+    <system:String x:Key="Help">Help</system:String>
+</ResourceDictionary>

@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="a9t9Ocr.LeftSideControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dragDrop="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+             xmlns:wpfFreeOcr="clr-namespace:a9t9Ocr"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Loaded="LeftSideControl_OnLoaded">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DictionaryStyle.xaml" />
+                <ResourceDictionary Source="../Resources/ResourceRussian.xaml" />
+                <ResourceDictionary Source="../Resources/ResourceEnglish.xaml" />
+                <ResourceDictionary>
+                    <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"></BooleanToVisibilityConverter>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="24"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left">
+            <ToggleButton Content="{DynamicResource OpenImages}"
+                           Background="GhostWhite"
+                                  Template="{StaticResource ResourceKey=ToggleButtonTemplate}"
+                                  Command="{Binding OpenImageCommand}">
+                <ToggleButton.Resources>
+                    <ImageSource x:Key="Img">
+                        ../Icons/photo1.png
+                    </ImageSource>
+                </ToggleButton.Resources>
+            </ToggleButton>
+            <ToggleButton  Content="{DynamicResource OpenPdf}"
+                           Background="GhostWhite"
+                           Template="{StaticResource ResourceKey=ToggleButtonTemplate}"
+                           Command="{Binding OpenPdfCommand}">
+                <ToggleButton.Resources>
+                    <ImageSource x:Key="Img">
+                        ../Icons/pdf.png
+                    </ImageSource>
+                </ToggleButton.Resources>
+            </ToggleButton>
+            <ToggleButton Content="{DynamicResource BeginOcr}"
+                          Background="LightGreen"
+                                  Template="{StaticResource ResourceKey=ToggleButtonTemplate}"
+                                  Command="{Binding BeginOcrCommand}">
+                <ToggleButton.Resources>
+                    <ImageSource x:Key="Img">
+                        ../Icons/process1.png
+                    </ImageSource>
+                </ToggleButton.Resources>
+            </ToggleButton>
+            <CheckBox VerticalAlignment="Center"
+                              Content="{DynamicResource RecognizeAll}"
+                              IsChecked="{Binding IsRecognizeAll}"
+                              Margin="5 0 0 0"
+                              Background="White"
+                              Style="{StaticResource CustomScheckBoxStyle}"/>
+        </StackPanel>
+        <Image Source="{Binding CurrentImage.Image}"
+               AllowDrop="True"
+               dragDrop:DragDrop.IsDropTarget="True"
+               dragDrop:DragDrop.DropHandler="{Binding}"
+               Grid.Row="1"
+               Stretch="Uniform" />
+        <!--<TextBlock Text="{Binding ProcessImages}"
+               Grid.Row="1"
+               Visibility="{Binding IsProcessEnabled, Converter=BoolToVisibilityConverter}"/>-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="75"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Command="{Binding PrevImageCommand}"
+                    HorizontalAlignment="Center" 
+                    Width="20" Height="20">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="GhostWhite" CornerRadius="2"/>
+                            <Image Name="Normal" Source="/WpfFreeOcr;component/Icons/left.png"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Label Content="{Binding CurrentImageText}" 
+                   Grid.Column="1"
+                   VerticalContentAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   Foreground="#3c3c3c"/>
+
+            <Button Grid.Column="2" 
+                    Command="{Binding NextImageCommand}"
+                    HorizontalAlignment="Center"
+                    Width="20" Height="20">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Background="GhostWhite" CornerRadius="2"/>
+                            <Image Name="Normal" Source="/WpfFreeOcr;component/Icons/right.png"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

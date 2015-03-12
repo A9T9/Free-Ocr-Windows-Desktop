@@ -1,0 +1,164 @@
+﻿<Window x:Class="a9t9Ocr.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:wpfFreeOcr="clr-namespace:a9t9Ocr"
+		Title="FreeOcr"
+		Height="550" 
+        Width="1150"
+        Background="Transparent"
+        WindowStyle="None"
+        SnapsToDevicePixels="True" 
+        av:TextOptions.TextFormattingMode="Display"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen"
+        x:Name="TableWindow"
+        MouseLeftButtonDown="WindowMouseLeftButtonDown"
+        Loaded="MainWindow_OnLoaded">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/ResourceRussian.xaml" />
+                <ResourceDictionary Source="../Resources/ResourceEnglish.xaml" />
+                <ResourceDictionary Source="DictionaryStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.Effect>
+        <DropShadowEffect ShadowDepth="0" Opacity="0.2" BlurRadius="13" />
+    </Window.Effect>
+    <Border x:Name="CentralLayout" Margin="8" BorderThickness="1"
+            BorderBrush="Transparent"
+            CornerRadius="4"
+            Background="WhiteSmoke">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23" />
+                <RowDefinition x:Name="SlideRow" Height="Auto" />
+                <RowDefinition x:Name="MenuRow" Height="0" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid  Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock FontSize="14"
+                           Foreground="#3c3c3c"
+                           HorizontalAlignment="Center"
+                           Grid.Column="1"
+                           Margin="60 0 0 0"
+                           VerticalAlignment="Center">
+                    <Run Text="(a9t9) Free Ocr for Windows Desktop" />
+                </TextBlock>
+
+                <wpfFreeOcr:ButtonIcon Command="{Binding CloseWindowCommand}"
+                                      ImageSource="../close1.png"
+                                      Grid.Column="4"
+                                      Margin="0 2 0 2"/>
+                <wpfFreeOcr:ButtonIcon Command="{Binding MinimizeWindowCommand}"
+                                      ImageSource="../minimize.png"
+                                      Grid.Column="2"
+                                      Margin="0 2 0 2"/>
+                <wpfFreeOcr:ButtonIcon Command="{Binding MaximizeWindowCommand}"
+                                      ImageSource="../maximize.png"
+                                      Grid.Column="3"
+                                      Margin="0 2 0 2"/>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Menu Background="White"
+                      Grid.ColumnSpan="3">
+                    <!-- ALL THE DynamicResource BINDINGS WORKS!!
+                          I dont know how to remove this warnings...
+                        d:datacontext = design instance not works -->
+                    <MenuItem Header="{DynamicResource File}" 
+                              x:Name="MenuItemFile"
+                              FontSize="13">
+                        <MenuItem Header="{DynamicResource OpenImages}" 
+                                  Command="{Binding OpenImageCommand}"
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource OpenPdf}" 
+                                  Command="{Binding OpenPdfCommand}"
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource BeginOcr}" 
+                                  Command="{Binding BeginOcrCommand}" 
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource Exit}" 
+                                  Command="{Binding ExitCommand}" 
+                                  FontSize="13" />
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource Save}"
+                              x:Name="MenuItemSave"
+                              FontSize="13">
+                        <MenuItem Header="{DynamicResource SaveText}" 
+                                  Command="{Binding SaveTextCommand}" 
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource SaveWord}" 
+                                  Command="{Binding SaveTextWordCommand}" 
+                                  FontSize="13" />
+                    </MenuItem>
+
+                    <!-- not i18n yet
+                    <MenuItem Header="{DynamicResource Language}" 
+                              x:Name="MenuItemLanguage"
+                              FontSize="13">
+                        <MenuItem Header="{DynamicResource English}" 
+                                  Command="{Binding ChangeLanguageCommand}" 
+                                  CommandParameter="en-US" 
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource Russian}" 
+                                  Command="{Binding ChangeLanguageCommand}" 
+                                  CommandParameter="ru-RU" 
+                                  FontSize="13" />
+                    </MenuItem>
+                    --> 
+                    <MenuItem Header="{DynamicResource Help}" 
+                              x:Name="MenuItemHelp"
+                              FontSize="13">
+                        <MenuItem Header="{DynamicResource OpenWebSite}" 
+                                  Command="{Binding OpenWebSiteCommand}" 
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource InstallLanguage}" 
+                                  Command="{Binding InstallLanguageCommand}" 
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource OpenLanguageFolder}" 
+                                  Command="{Binding OpenLanguageFolderCommand}" 
+                                  FontSize="13" />
+                        <MenuItem Header="{DynamicResource About}" 
+                                  Command="{Binding AboutCommand}"
+                                  FontSize="13" />
+                    </MenuItem>
+  
+                    <Menu.Effect>
+                        <DropShadowEffect ShadowDepth="2" 
+                                  BlurRadius="3" 
+                                  Direction="270" 
+                                  Color="#FF747474"
+                                  Opacity="0.4" />
+                    </Menu.Effect>
+                </Menu>
+                <Rectangle Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" Width="1" Stroke="Black" />
+                <wpfFreeOcr:LeftSideControl Grid.Row="1" 
+                                      Grid.Column="0"
+                                      x:Name="LeftSideControl"></wpfFreeOcr:LeftSideControl>
+                <wpfFreeOcr:RightSideControl  Grid.Row="1" 
+                                        Grid.Column="2"
+                                        x:Name="RightSideControl"></wpfFreeOcr:RightSideControl>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
