@@ -11,7 +11,7 @@ namespace a9t9Ocr
     class TesseractOcr : ITesseractOrc
     {
         public string Language { get; set; }
-        private readonly string _pathToTestData = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\(a9t9)FreeOcr\tessdata";
+        private readonly string _pathToTestData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\(a9t9)OcrDesktop\tessdata";
 
         public TesseractOcr(string lang)
         {

@@ -34,7 +34,7 @@ namespace a9t9Ocr
             //var culturesName = cultures.Select(cultureInfo => cultureInfo.ThreeLetterWindowsLanguageName).ToList();
             //var uniqueCultures = culturesName.Distinct().ToArray();
             var filesName = new List<string>();
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\(a9t9)FreeOcr\tessdata";
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\(a9t9)OcrDesktop\tessdata";
             if (Directory.Exists(path))
             {
                 string[] filePaths = Directory.GetFiles(path, @"*.traineddata");

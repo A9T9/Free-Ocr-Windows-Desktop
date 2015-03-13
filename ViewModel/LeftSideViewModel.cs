@@ -114,7 +114,7 @@ namespace a9t9Ocr
         public delegate void ExitEventChanged(object sender, EventArgs args);
 
         private readonly ITesseractOrc _tesseractOrc;
-        private readonly string _pathToTestData = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\(a9t9)FreeOcr\tessdata"; 
+        private readonly string _pathToTestData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\(a9t9)OcrDesktop\tessdata"; 
         readonly ImageConverter _converter = new ImageConverter();
         public LeftSideViewModel(ITesseractOrc orc)
         {
@@ -201,7 +201,7 @@ namespace a9t9Ocr
         {
             if (!Directory.Exists(_pathToTestData))
             {
-                MessageBox.Show("I am speechless: No Tesseract language data found.");
+                MessageBox.Show("Ooops. Test image not found (no big deal, everything else should still work fine).\nI looked in: "+ _pathToTestData);
                 return;
             }
 
@@ -340,10 +340,10 @@ namespace a9t9Ocr
         {
             try
             {
-                var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + @"\(a9t9)FreeOcr\tessdata";
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + @"\(a9t9)OcrDesktop\tessdata";
                 if (!Directory.Exists(path))
                 {
-                    MessageBox.Show("Folder user documents >(a9t9)FreeOcr\tessdata for Tesseract language data not found.");
+                    MessageBox.Show("Folder for Tesseract language training data not found. I looked at "+path);
                     return;
                 }
                 //    Directory.CreateDirectory(path);
@@ -364,7 +364,7 @@ namespace a9t9Ocr
         }
         private void About(object obj)
         {
-            MessageBox.Show("(a9t9) Free OCR for Windows Desktop V1.08\n\n(c) 2015 http://a9t9.com - Full source code available (GPL)\n\nCredits:\n* PDF processing: Ghostscript (GPL)\n* Iconset Dortmund (Creative Commons 3.0)", "About (a9t9) Free OCR for Windows Desktop");
+            MessageBox.Show("(a9t9) Free OCR for Windows Desktop V1.08\n\n(c) 2015 http://a9t9.com - Full source code available (GPL)\n\nCredits:\n* OCR: Tesseract OCR (Google)\n* PDF processing: Ghostscript (GPL)\n* Iconset Dortmund (Creative Commons 3.0)", "About (a9t9) Free OCR for Windows Desktop");
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
